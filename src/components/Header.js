@@ -10,7 +10,7 @@ const Header = () => {
       .then(() => {})
       .catch((err) => console.error(err));
   };
-  
+
   return (
     <div>
       <div className="navbar justify-between px-3 py-1 bg-neutral text-neutral-content">
@@ -24,12 +24,13 @@ const Header = () => {
             Home
           </Link>
           {user ? (
-            <button
+            <Link
               onClick={handleSingOut}
               className="btn btn-ghost normal-case text-xl"
+              to={"/login"}
             >
               Sign Out
-            </button>
+            </Link>
           ) : (
             <Link to={"/login"} className="btn btn-ghost normal-case text-xl">
               Login

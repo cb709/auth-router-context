@@ -4,24 +4,24 @@ import { AuthContext } from "../context/UserContext";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
+    // const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(name, email, password);
     createUser(email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user)
-      event.target.reset();
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage)
-    });
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        event.target.reset();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode, errorMessage);
+      });
   };
 
   return (
