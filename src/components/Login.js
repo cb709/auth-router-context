@@ -1,34 +1,36 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/UserContext";
 
 const Login = () => {
   const { signIn, setUser, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-
     signIn(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
+        event.target.reset();
+        console.log('redirecting start');
+        return <Navigate to={'/dashboard'}></Navigate>
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorCode, errorMessage);
       });
-    event.target.reset();
   };
 
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        return <Navigate to={'/dashboard'}></Navigate>
       })
       .catch((error) => {
         // Handle Errors here.

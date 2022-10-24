@@ -23,6 +23,9 @@ const Header = () => {
           <Link to={"/"} className="btn btn-ghost normal-case text-xl">
             Home
           </Link>
+          <Link to={"/dashboard"} className="btn btn-ghost normal-case text-xl">
+            Dashboard
+          </Link>
           {user ? (
             <Link
               onClick={handleSingOut}
